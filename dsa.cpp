@@ -1,63 +1,97 @@
 #include "dsa.h"
+#include <iostream> 
 
-int add(int a, int b) {
-    return a + b;
+SimpleVector::SimpleVector() {
+    length = 0;
+    capacity_val = 16;
+    arr = new int[capacity_val];
 }
 
-int subtract(int a, int b) {
-    return a - b;
+SimpleVector::~SimpleVector() {
+    delete[] arr;
 }
 
-class SimpleVector {
-    private:
-        int* arr = new int[2];
-        int length;
+void SimpleVector::resize(int new_capacity) {
+    int* newArr = new int[new_capacity];
+    memcpy(newArr, arr, length * sizeof(int));
+    delete[] arr;
+    arr = newArr;
+    capacity_val = new_capacity;
+}
 
-        void resize() {
-            int* newArr = new int[length * 2];
-            memcpy(newArr, arr, length * sizeof(int));
-            delete [] arr;
-            arr = newArr;
+int SimpleVector::size() const { return length; }
+int SimpleVector::capacity() const { return capacity_val; }
+bool SimpleVector::is_empty() const { return length == 0; }
+
+void SimpleVector::push(int item) {
+    if (length == capacity_val) resize(capacity_val * 2);
+    *(arr + length) = item;
+    length++;
+}
+
+void SimpleVector::insert(int index, int item) {
+    if (index < 0 || index > length)
+        throw std::out_of_range("Index out of bounds");
+
+    if (length == capacity_val) resize(capacity_val * 2);
+
+    for (int i = length; i > index; i--) {
+        *(arr + i) = *(arr + i - 1);
+    }
+
+    *(arr + index) = item;
+    length++;
+}
+
+void SimpleVector::prepend(int item) {
+    insert(0, item);
+}
+
+int SimpleVector::pop() {
+    if (length == 0) throw std::out_of_range("Array is empty");
+
+    int item = *(arr + length - 1);
+    length--;
+
+    // shrink if size is 1/4 of capacity
+    if (length > 0 && length == capacity_val / 4) {
+        resize(capacity_val / 2);
+    }
+
+    return item;
+}
+
+void SimpleVector::deleteAt(int index) {
+    if (index < 0 || index >= length)
+        throw std::out_of_range("Index out of bounds");
+
+    for (int i = index; i < length - 1; i++) {
+        *(arr + i) = *(arr + i + 1);
+    }
+    length--;
+}
+
+// remove all occurrences of item
+void SimpleVector::remove(int item) {
+    int write = 0;
+    for (int read = 0; read < length; read++) {
+        if (*(arr + read) != item) {
+            *(arr + write) = *(arr + read);
+            write++;
         }
+    }
+    length = write;
+}
 
-    public:
-        SimpleVector() {
-            length = 0;
-        }
+int SimpleVector::at(int index) const {
+    if (index < 0 || index >= length)
+        throw std::out_of_range("Index out of bounds");
+    return *(arr + index);
+}
 
-        int size() {
-            return length;
-        }
-
-        int capacity() {
-            return sizeof(arr) / sizeof(int);
-        }
-
-        void push(int e) {
-            if (size() == capacity()) {
-                resize();
-            }
-
-            arr[length] = e;
-            length += 1;
-        }
-
-        int pop() {
-            if (length == 0) {
-                cout << "Array is empty";
-                return -1;
-            }
-
-            length--;
-            return arr[length + 1];
-        }
-
-        int at(int index) {
-            if (index > length - 1) {
-                cout << "Index out of bounds.\n";
-                return -1;
-            }
-
-            return arr[index];
-        }
-};
+int SimpleVector::find(int item) const {
+    for (int i = 0; i < length; i++) {
+        if (*(arr + i) == item) return i;
+    }
+    return -1;
+}
