@@ -32,5 +32,35 @@ public:
     int find(int item) const;
 };
 
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* prev;
+    Node(int item);
+};
+
+class LinkedList {
+private:
+    int length;
+    Node* head;
+    Node* tail;
+
+public:
+    LinkedList();
+    
+    void push_front(int val);
+    void push_back(int val);
+    void insert(int index, int val);
+    void erase(int index);
+    int pop_front();
+    int pop_back();
+
+    int front();
+    int back();
+    int size();
+    bool empty();
+};
+
 
 #endif

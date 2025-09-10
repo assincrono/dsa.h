@@ -5,7 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---------- Library ----------
-add_library(dsa src/simple_vector.cpp)
+add_library(dsa 
+  src/simple_vector.cpp
+  src/linked_list.cpp
+)
 target_include_directories(dsa PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # ---------- Catch2 ----------
@@ -19,4 +22,6 @@ FetchContent_MakeAvailable(catch2)
 
 # ---------- Tests ----------
 add_executable(simple_vector_test tests/simple_vector_test.cpp)
+add_executable(linked_list_test tests/linked_list_test.cpp)
 target_link_libraries(simple_vector_test PRIVATE dsa Catch2::Catch2WithMain)
+target_link_libraries(linked_list_test   PRIVATE dsa Catch2::Catch2WithMain)
