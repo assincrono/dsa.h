@@ -1,6 +1,6 @@
 ## Introduction
 
-On my studies of data structures and algorithms, I am following the <a href="">Coding Interview University roadmap</a>, and I have been playing around C++ at Codeforces for a while, so I figured why not implement the common data structures into a C++ library? 
+On my studies of data structures and algorithms, I am following the <a href="">Coding Interview University Roadmap</a>, and I have been playing around C++ at Codeforces for a while, so I figured why not implement the common data structures into a C++ library? 
 
 #### Build
 
