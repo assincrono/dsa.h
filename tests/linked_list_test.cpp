@@ -83,3 +83,38 @@ TEST_CASE("insert() works properly") {
 
     REQUIRE( l.size() == 4 );
 }
+
+TEST_CASE("erase() works properly") {
+    LinkedList l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.erase(1);
+
+    REQUIRE( l.size() == 2 );
+}
+
+TEST_CASE("value_n_from_end() works properly") {
+    LinkedList l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.push_back(4);
+    l.push_back(5);
+    l.push_back(6);
+
+    REQUIRE( l.value_n_from_end(1) == 5 );
+    REQUIRE( l.value_n_from_end(4) == 2 );
+}
+
+TEST_CASE("reverse() works properly") {
+    LinkedList l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.reverse();
+
+    REQUIRE( l.value_n_from_end(0) == 1 );
+    REQUIRE( l.value_n_from_end(1) == 2 );
+    REQUIRE( l.value_n_from_end(2) == 3 );
+}

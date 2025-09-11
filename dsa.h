@@ -58,8 +58,11 @@ public:
 
     int front();
     int back();
+    int value_n_from_end(int n);
     int size();
     bool empty();
+
+    void reverse();
 };
 
 

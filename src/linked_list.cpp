@@ -108,11 +108,52 @@ void LinkedList::erase(int index) {
         if (count == index) {
             currentNode->prev->next = currentNode->next;
             currentNode->next->prev = currentNode->prev;
+            length--;
             return;
         }
 
         currentNode = currentNode->next;
         count++;
+    }
+}
+
+int LinkedList::value_n_from_end(int n) {
+    Node* currentNode = tail;
+
+    while (n >= 0) {
+        if (currentNode == NULL) {
+            throw std::out_of_range("Index out of bounds.");
+        }
+
+        if (n == 0) {
+            return currentNode->val;
+        }
+
+        currentNode = currentNode->prev;
+        n--;
+    }
+
+    return -1;
+}
+
+void LinkedList::reverse() {
+    Node* currentNode = tail;
+    Node* currentHead = head;
+
+    tail = currentHead;
+    head = currentNode;
+
+    int count = length;
+
+    while (count > 0) {
+        Node* prev = currentNode->prev;
+        Node* next = currentNode->next;
+
+        currentNode->prev = next;
+        currentNode->next = prev;
+
+        currentNode = currentNode->next;
+        count--;
     }
 }
 
