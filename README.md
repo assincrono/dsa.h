@@ -4,7 +4,7 @@ On my studies of data structures and algorithms, I am following the <a href="">C
 
 #### Features
 * Vectors (done)
-* Linked Lists (in progress)
+* Linked Lists (done)
 * Stack (backlog)
 * Hash table (backlog)
 
