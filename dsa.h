@@ -55,10 +55,12 @@ public:
     void erase(int index);
     int pop_front();
     int pop_back();
+    void remove_value(int value);
 
     int front();
     int back();
     int value_n_from_end(int n);
+    int value_at(int index);
     int size();
     bool empty();
 

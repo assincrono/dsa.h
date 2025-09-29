@@ -118,3 +118,26 @@ TEST_CASE("reverse() works properly") {
     REQUIRE( l.value_n_from_end(1) == 2 );
     REQUIRE( l.value_n_from_end(2) == 3 );
 }
+
+TEST_CASE("value_at() works properly") {
+    LinkedList l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+
+    REQUIRE( l.value_at(0) == 1 );
+    REQUIRE( l.value_at(1) == 2 );
+    REQUIRE( l.value_at(2) == 3 );
+    REQUIRE( l.value_at(2) != 7 );
+}
+
+TEST_CASE("remove_value() works properly") {
+    LinkedList l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.remove_value(2);
+
+    REQUIRE( l.size() == 2 );
+    REQUIRE( l.value_at(1) == 3 );
+}

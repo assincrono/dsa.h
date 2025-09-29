@@ -172,3 +172,27 @@ int LinkedList::size() {
 bool LinkedList::empty() {
     return length == 0;
 }
+
+int LinkedList::value_at(int index) {
+    int count = 0;
+    Node* node = head;
+    
+    while (count < index) {
+        node = node->next;
+        count++;
+    }
+
+    return node->val;
+}
+
+void LinkedList::remove_value(int value) {
+    Node* node = head;
+    int index = 0;
+
+    while (node != NULL && node->val != value) {
+        node = node->next;
+        index++;
+    }
+
+    this->erase(index);
+}
